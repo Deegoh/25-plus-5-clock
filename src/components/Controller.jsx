@@ -1,19 +1,17 @@
-/* eslint-disable radix */
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 
-const Label = ({ id, children, setValue }) => {
-  const [display, setDisplay] = useState(setValue);
-
+const Controller = ({
+  id, children, value, setValue,
+}) => {
   const handleClick = (e) => {
     switch (e.target.innerText) {
       case '▲':
-        setDisplay(parseInt(display) + 1);
+        if (value < 60) setValue(value + 1);
         break;
 
       case '▼':
-        setDisplay(display - 1);
+        if (value > 1) setValue(value - 1);
         break;
 
       default:
@@ -25,10 +23,10 @@ const Label = ({ id, children, setValue }) => {
     <div className="control">
       <div id={`${id}-label`}>{children}</div>
       <div id={`${id}-increment`} onClick={(e) => handleClick(e)} aria-hidden="true">▲</div>
-      <div id={`${id}-lenght`}>{display}</div>
+      <div id={`${id}-length`}>{value}</div>
       <div id={`${id}-decrement`} onClick={(e) => handleClick(e)} aria-hidden="true">▼</div>
     </div>
   );
 };
 
-export default Label;
+export default Controller;

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Label from './components/Label';
 import './App.css';
-import Timer from './components/TImer';
+import Controller from './components/Controller';
+import Timer from './components/Timer';
 
 function App() {
+  const [breakValue, setBreakValue] = useState(5);
+  const [sessionValue, setSessionValue] = useState(25);
+
   return (
     <>
-      <Label id="break" setValue="5">Break Length</Label>
-      <Label id="session" setValue="25">Session Length</Label>
-      <Timer />
+      <Controller id="break" setValue={setBreakValue} value={breakValue}>Break Length</Controller>
+      <Controller id="session" setValue={setSessionValue} value={sessionValue}>Session Length</Controller>
+      <Timer
+        setBreakValue={setBreakValue}
+        breakValue={breakValue}
+        setSessionValue={setSessionValue}
+        sessionValue={sessionValue}
+      />
     </>
   );
 }
